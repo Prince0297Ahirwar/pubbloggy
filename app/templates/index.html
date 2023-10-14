@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h1>All Blogs</h1>
+  <a class="btn btn-primary" href="{{ url_for('create_blog') }}" role="button">Create Blog</a>
+  <a class="btn btn-primary" href="{{ url_for('my_blogs') }}" role="button">My Blogs</a>
+  <hr>
+  {% for post in posts %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">By {{ post.author.username }} : {{ post.title }}</h5>
+        <p class="card-text">{{ post.content }}</p>
+      </div>
+      <p>
+        <a href="{{ url_for('like', blog_id=post.id) }}">
+          <img src="{{ url_for('static', filename='images/' + 'like.png') }}" alt="Like" width="30" height="30">
+        </a>
+        {{ post.likes.filter_by(like=True).count() }}
+        <a href="{{ url_for('dislike', blog_id=post.id) }}">
+          <img src="{{ url_for('static', filename='images/' + 'dislike.png') }}" alt="Like" width="30" height="30">
+        </a>
+        {{ post.likes.filter_by(dislike=True).count() }}
+
+        <a  href="{{ url_for('view_blog', blog_id=post.id) }}">
+          <img src="{{ url_for('static', filename='images/' + 'comment.png') }}" alt="comment" width="30" height="30">
+        </a>
+    </p>
+    </div>
+  {% endfor %}
+{% endblock %}
+

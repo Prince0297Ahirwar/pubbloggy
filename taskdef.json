@@ -1,0 +1,19 @@
+{
+    "family": "bloggy-app",
+    "containerDefinitions": [
+      {
+        "name": "bloggy-app",
+        "image": "602190549792.dkr.ecr.ap-south-1.amazonaws.com/bloggy-app:latest",
+        "memory": 512,
+        "cpu": 256,
+        "essential": true,
+        "portMappings": [
+          {
+            "containerPort": 5000,
+            "hostPort": 5000
+          }
+        ]
+      }
+    ]
+  }
+  

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h1>By {{ blog.author.username }} : {{ blog.title }}</h1>
+  <p>{{ blog.content }}</p>
+  <hr>
+  <h2>Comments</h2>
+  {% for comment in comments %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text">{{ comment.content }}</p>
+        <p>By {{ comment.author.username }} on {{ comment.timestamp }}</p>
+      </div>
+    </div>
+  {% endfor %}
+  <form action="{{ url_for('add_comment', blog_id=blog.id) }}" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.content.label }}
+      {{ form.content(class="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
+  </form>
+{% endblock %}
